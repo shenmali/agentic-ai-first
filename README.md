@@ -6,7 +6,18 @@ Interview-grade agentic-AI problems, solved with modern techniques and runnable 
 - **Demos:** HuggingFace Spaces (see each case-study)
 
 ## Case studies
-1. ReAct from scratch — `demos/01-react-from-scratch`
+
+| # | Case study | Layer | Live demo |
+|---|-----------|-------|-----------|
+| 1 | [ReAct from scratch](https://agentic.mashen.dev/en/react-from-scratch) | Pattern | `demos/01-react-from-scratch` |
+| 2 | [Plan-Execute-Reflect](https://agentic.mashen.dev/en/plan-execute-reflect) | Pattern | `demos/02-plan-execute` |
+| 3 | [Orchestrator-Workers](https://agentic.mashen.dev/en/orchestrator-workers) | Pattern | `demos/03-orchestrator-workers` |
+| 4 | [Evals & LLM-as-judge](https://agentic.mashen.dev/en/evals-llm-as-judge) | Production | `demos/04-evals-llm-as-judge` |
+| 5 | [Observability & tracing](https://agentic.mashen.dev/en/observability-tracing) | Production | `demos/05-observability-tracing` |
+| 6 | [Guardrails & retries](https://agentic.mashen.dev/en/guardrails-retries) | Production | `demos/06-guardrails-retries` |
+| 7 | [Deep Research Agent](https://agentic.mashen.dev/en/deep-research) | Flagship | `demos/07-deep-research` |
+
+Articles are available in English, Turkish, and Dutch.
 
 ## Repo layout
 - `site/` — Astro static site (EN/TR/NL)
