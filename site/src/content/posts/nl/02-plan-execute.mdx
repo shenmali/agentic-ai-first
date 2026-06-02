@@ -1,0 +1,37 @@
+---
+title: "Plan-Execute-Reflect: agents die hun eigen werk herzien"
+description: "Maak een plan, voer het uit, reflecteer en herplan — voor taken waarop één lus afdwaalt."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "plan-execute-reflect"
+spaceUrl: "https://mashen-agentic-plan-execute.hf.space"
+githubPath: "demos/02-plan-execute"
+order: 2
+layer: "pattern"
+---
+
+## Het sollicitatieprobleem
+
+> "Ontwerp een agent voor taken met meerdere stappen waarbij de eerste poging
+> vaak vereisten mist."
+
+## Waarom een platte lus afdwaalt
+
+Bij lange taken verliest een ReAct-lus de draad — ze optimaliseert de volgende
+stap, niet het hele doel. Het scheiden van *plannen* en *doen* houdt het doel
+expliciet.
+
+## Het patroon
+
+Drie rollen, één lus: een **planner** zet de taak om in geordende stappen; een
+**executor** voert elke stap uit (met tools); een **reflector** controleert of het
+doel is bereikt en, zo niet, geeft feedback die een vers plan voedt. Begrensd door
+`max_rounds`.
+
+## Afwegingen
+
+- **Gebruik het** voor complexe, eisen-zware taken waar een eerste versie zelden volstaat.
+- **Vermijd het** bij eenvoudige opzoekingen — de extra planner-/reflector-aanroepen zijn verspilde kosten.
+- **Let op** de rondelimiet zodat reflectie niet eindeloos doorloopt.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.

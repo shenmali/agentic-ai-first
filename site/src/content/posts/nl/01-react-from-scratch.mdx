@@ -1,0 +1,37 @@
+---
+title: "ReAct vanaf nul: de redeneer- en actielus"
+description: "Hoe agents redeneren en tools afwisselen — opgebouwd vanuit de basisprincipes."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "react-from-scratch"
+spaceUrl: "https://mashen-agentic-react-from-scratch.hf.space"
+githubPath: "demos/01-react-from-scratch"
+order: 1
+layer: "pattern"
+---
+
+## Het sollicitatieprobleem
+
+> "Bouw een agent die vragen beantwoordt die zowel redeneren als externe
+> opzoekingen vereisen — zonder de stappen hard te coderen."
+
+## Waarom één prompt niet volstaat
+
+Een enkele voltooiing kan niet *tijdens* de taak besluiten dat er gezocht of
+gerekend moet worden; ze kiest in één keer een antwoord. ReAct doorbreekt dat: het
+model denkt, roept eventueel een tool aan, observeert het resultaat en herhaalt.
+
+## De lus
+
+Het hele patroon is een `while`-lus over `chat()`: geeft het model tool-aanroepen
+terug, voer ze uit en voeg de resultaten toe als `tool`-berichten; anders is de
+inhoud het eindantwoord. Tools worden als JSON-schema's aan het model beschreven,
+zodat het kiest *welke* het aanroept en *met welke argumenten*.
+
+## Afwegingen
+
+- **Gebruik het** wanneer de benodigde tools per vraag verschillen en het pad niet vooraf vaststaat.
+- **Vermijd het** bij een vaste workflow — een hardgecodeerde pipeline is goedkoper en voorspelbaarder.
+- **Let op** doorslaande lussen: begrens altijd `max_steps`.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.

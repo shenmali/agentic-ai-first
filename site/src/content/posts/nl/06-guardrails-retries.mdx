@@ -1,0 +1,36 @@
+---
+title: "Guardrails & retries: betrouwbare output van een onbetrouwbaar model"
+description: "Valideer gestructureerde output tegen een schema en probeer opnieuw met feedback; blokkeer ongewenste invoer aan de grens."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "guardrails-retries"
+spaceUrl: "https://mashen-agentic-guardrails-retries.hf.space"
+githubPath: "demos/06-guardrails-retries"
+order: 6
+layer: "production"
+---
+
+## Het sollicitatieprobleem
+
+> "Maak een agent die betrouwbare gestructureerde output levert en bestand is
+> tegen prompt-injectie."
+
+## Waarom het model vertrouwen faalt
+
+Modellen geven *bijna*-geldige JSON terug, wijken af van schema's en volgen
+geïnjecteerde instructies. Je moet aan de grens valideren.
+
+## Het patroon
+
+Een **input-guardrail** weigert te lange of ongewenste prompts vóór elke
+model-aanroep. De agent genereert dan JSON, **valideert** die tegen een schema en
+**probeert bij mislukking opnieuw met de validatiefout teruggekoppeld** — begrensd
+door `max_retries`.
+
+## Afwegingen
+
+- **Gebruik het** wanneer downstream-code de output van de agent als data verwerkt.
+- **Let op** latentie/kosten: begrens retries en verkies waar mogelijk de
+  gestructureerde-output-modus van de aanbieder als eerste verdedigingslinie.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.

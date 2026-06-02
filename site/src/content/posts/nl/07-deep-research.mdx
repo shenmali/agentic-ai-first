@@ -1,0 +1,36 @@
+---
+title: "Deep Research Agent: van een onderwerp naar een onderbouwde brief"
+description: "Plan deelvragen, doorzoek meerdere bronnen, houd citaten bij en synthetiseer een gerefereerd rapport."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "deep-research"
+spaceUrl: "https://mashen-agentic-deep-research.hf.space"
+githubPath: "demos/07-deep-research"
+order: 7
+layer: "flagship"
+---
+
+## Het sollicitatieprobleem
+
+> "Bouw een agent die een onderwerp onderzoekt en een brief oplevert die je echt
+> kunt vertrouwen — met bronnen."
+
+## Waarom zoek-dan-samenvatten niet volstaat
+
+Eén zoekopdracht geeft een oppervlakkig, onbronvermeld antwoord. Echt onderzoek
+ontleedt het onderwerp en houdt bij waar elke bewering vandaan komt.
+
+## Het patroon
+
+Een **planner** splitst het onderwerp in deelvragen. De agent **doorzoekt** elke
+deelvraag (standaard DuckDuckGo, optioneel Tavily voor kwaliteit), **houdt elke
+bron bij** met een genummerde id, en een **synthesizer** schrijft een brief die
+bronnen inline citeert als `[n]` met een bronnenlijst eronder.
+
+## Afwegingen
+
+- **Gebruik het** wanneer herkomst belangrijk is en het onderwerp meerdere invalshoeken beslaat.
+- **Let op** de kosten: die groeien met het aantal deelvragen en bronnen.
+- **Wissel** de zoek-backend om kosten tegen kwaliteit af te wegen zonder de agent aan te raken.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.

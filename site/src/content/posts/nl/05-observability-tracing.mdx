@@ -1,0 +1,35 @@
+---
+title: "Observability & tracing: agents debuggen in productie"
+description: "Leg tokens, kosten en latentie per stap vast — de instrumentatie die je nodig hebt om een agent te debuggen en budgetteren."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "observability-tracing"
+spaceUrl: "https://mashen-agentic-observability-tracing.hf.space"
+githubPath: "demos/05-observability-tracing"
+order: 5
+layer: "production"
+---
+
+## Het sollicitatieprobleem
+
+> "Je agent is traag en duur in productie. Hoe kom je erachter waarom?"
+
+## Waarom print-statements niet volstaan
+
+Agents doen veel model- en tool-aanroepen. Zonder gestructureerde data per stap
+zie je niet waar de tokens, euro's en milliseconden heen gaan.
+
+## Het patroon
+
+Leg voor elke actie een **Step** vast met zijn tokens, geschatte kosten en
+latentie. Render de **trace als een tabel** plus een **kostenuitsplitsing per
+stap-soort**. Deze demo gebruikt een vaste zoek→samenvat-pipeline zodat de trace
+voorspelbaar is — het gaat om de instrumentatie, niet om de agent.
+
+## Afwegingen
+
+- **Altijd de moeite waard**: de overhead is verwaarloosbaar en het is de basis voor
+  kostenbeheersing en evals.
+- **Breid het uit** met persistente opslag en dashboards wanneer je multi-user gaat.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.

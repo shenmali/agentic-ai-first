@@ -1,0 +1,36 @@
+---
+title: "Evals & LLM-as-judge: weten dat je agent echt goed is"
+description: "Beoordeel antwoorden tegen referenties met een LLM-jury — de regressietest voor niet-deterministische systemen."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "evals-llm-as-judge"
+spaceUrl: "https://mashen-agentic-evals-llm-as-judge.hf.space"
+githubPath: "demos/04-evals-llm-as-judge"
+order: 4
+layer: "production"
+---
+
+## Het sollicitatieprobleem
+
+> "De output van je agent is niet deterministisch. Hoe meet je kwaliteit en vang
+> je regressies op vóór je gebruikers dat doen?"
+
+## Waarom op het oog beoordelen faalt
+
+Handmatige steekproeven schalen niet en missen regressies. Je hebt een
+herhaalbare score nodig.
+
+## Het patroon
+
+Houd een kleine **dataset** met referentieantwoorden bij. Draai het systeem onder
+test, laat dan een **LLM-jury** elk antwoord tegen zijn referentie scoren (1–5,
+geslaagd/gezakt) en **aggregeer**. Draai het in CI om wijzigingen te bewaken.
+
+## Afwegingen
+
+- **Gebruik het** om kwaliteit in de tijd te volgen en regressies automatisch te blokkeren.
+- **Wees bewust** dat jury's bias en variantie hebben — fixeer het jurymodel, gebruik
+  een strikte rubric en combineer waar mogelijk met exacte-match-controles.
+- **Goedkoop te draaien**: een handvol cases kost centen.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.

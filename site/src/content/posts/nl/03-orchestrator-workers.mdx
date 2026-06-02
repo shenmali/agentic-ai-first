@@ -1,0 +1,38 @@
+---
+title: "Orchestrator-Workers: een taak verdelen over specialisten"
+description: "Een baas-agent ontleedt de taak, stuurt specialist-workers aan en synthetiseert hun output."
+publishDate: 2026-06-02
+lang: nl
+urlSlug: "orchestrator-workers"
+spaceUrl: "https://mashen-agentic-orchestrator-workers.hf.space"
+githubPath: "demos/03-orchestrator-workers"
+order: 3
+layer: "pattern"
+---
+
+## Het sollicitatieprobleem
+
+> "Hoe zou je een brede taak verdelen over gespecialiseerde agents en de
+> resultaten weer samenvoegen?"
+
+## Waarom één generalist tekortschiet
+
+Eén prompt die "alles moet dekken" levert oppervlakkige, ongerichte output op.
+Specialisatie — een historicus, een econoom, een ingenieur — geeft diepgang.
+
+## Het patroon
+
+Een **orchestrator** ontleedt de taak in onafhankelijke subtaken, elk gelabeld met
+een specialistrol. Elke **worker** is een LLM-aanroep onder de systeemprompt van
+die rol. De orchestrator **synthetiseert** vervolgens de worker-outputs tot één
+antwoord.
+
+## Afwegingen
+
+- **Gebruik het** voor brede taken die netjes in onafhankelijke delen uiteenvallen.
+- **Vermijd het** bij sterk gekoppelde stappen waarbij workers elkaars output
+  onderweg zouden moeten zien.
+- **Let op** de kosten: het zijn `N + 2` model-aanroepen. Subtaken kunnen parallel
+  draaien om latentie te beperken.
+
+Probeer het hieronder live met je eigen OpenRouter-sleutel.
