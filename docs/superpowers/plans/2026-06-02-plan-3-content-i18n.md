@@ -12,6 +12,12 @@
 
 **Spec:** `docs/superpowers/specs/2026-06-02-agentic-ai-showcase-design.md`
 
+> **Execution corrections (learned during Plan 1 — apply these here):**
+> - **Use `urlSlug`, not `slug`.** Astro reserves `slug` in content-collection schemas (build error). The schema already declares `urlSlug: z.string()`. Every post's frontmatter MUST include `urlSlug: "<slug>"`, and routing references `entry.data.urlSlug` (NOT `entry.data.slug` / `entry.slug`). In this plan's Task 1 `[slug].astro` rewrite, the `bySlug` grouping and `params` must key on `entry.data.urlSlug`.
+> - **`@astrojs/sitemap` is currently disabled** in `astro.config.mjs` (3.7.3 crashes astro 4.16's `build:done` with `_routes` undefined). For Task 5, re-enable only with a version verified against astro 4.16 (test `npm run build` stays green) — or generate the sitemap manually. Don't assume the plan's snippet works as-is.
+> - **i18n dict access must be typed** (`Record<string,string>`) or `astro check` fails under strict mode — already handled in `utils.ts`.
+> - **Node 18+/20 required** (Astro 4 won't run on Node 16). Locally use homebrew node (`/opt/homebrew/bin`, node 24); CI uses node 20. Run `astro check`/`build` with that node on `PATH`.
+
 > **Verification convention for this plan:** unless a step says otherwise, "verify" means run `cd site && npm run build` and expect `astro check` to report **0 errors** and the build to emit the expected routes. Article prose is additionally read in `npm run dev`.
 
 ---
