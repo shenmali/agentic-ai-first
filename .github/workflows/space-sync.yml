@@ -1,0 +1,22 @@
+name: Sync demos to HF Spaces
+on:
+  push:
+    branches: [main]
+    paths: ['demos/**', '.github/workflows/space-sync.yml', 'scripts/sync_spaces.py']
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install "huggingface_hub>=0.24,<1.0"
+      - name: Sync changed demos
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USER: mashen
+        run: python -m scripts.sync_spaces
