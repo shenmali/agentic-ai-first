@@ -56,9 +56,15 @@ class ReActAgent:
                         latency_ms=latency,
                     )
                 for tc in resp.tool_calls:
-                    args = json.loads(tc["arguments"]) if tc["arguments"] else {}
                     yield Step(kind="action", content=f"{tc['name']}({tc['arguments']})")
-                    result = self.tools.execute(tc["name"], args)
+                    try:
+                        args = json.loads(tc["arguments"]) if tc["arguments"] else {}
+                    except json.JSONDecodeError as e:
+                        # Thread the error back as an observation so the model can
+                        # recover, rather than aborting the whole run.
+                        result = f"Error: invalid tool arguments (not valid JSON): {e}"
+                    else:
+                        result = self.tools.execute(tc["name"], args)
                     yield Step(kind="observation", content=result)
                     messages.append({"role": "tool", "tool_call_id": tc["id"], "content": result})
                 continue

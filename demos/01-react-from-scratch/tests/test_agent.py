@@ -63,3 +63,23 @@ def test_react_agent_stops_at_max_steps():
     steps = list(agent.run("loop forever"))
     assert steps[-1].kind == "final"
     assert "max steps" in steps[-1].content.lower()
+
+
+def test_react_agent_recovers_from_bad_tool_json():
+    scripted = _ScriptedLLM([
+        LLMResponse(
+            content="calling tool",
+            tool_calls=[{"id": "1", "name": "echo", "arguments": "{not valid json"}],
+            prompt_tokens=1,
+            completion_tokens=1,
+        ),
+        LLMResponse(
+            content="Recovered, final answer", tool_calls=[], prompt_tokens=1, completion_tokens=1
+        ),
+    ])
+    agent = ReActAgent(llm=scripted, tools=_echo_registry(), max_steps=5)
+    steps = list(agent.run("bad json"))
+    observations = [s.content for s in steps if s.kind == "observation"]
+    assert any("invalid tool arguments" in o.lower() for o in observations)
+    assert steps[-1].kind == "final"
+    assert "Recovered" in steps[-1].content
