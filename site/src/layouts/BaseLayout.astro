@@ -1,6 +1,7 @@
 ---
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { LOCALES } from '../i18n/utils';
+import '../styles/global.css';
 interface Props { lang: string; title: string; description?: string; slug?: string }
 const { lang, title, description = '', slug } = Astro.props;
 const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
