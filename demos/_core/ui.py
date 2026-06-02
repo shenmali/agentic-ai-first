@@ -87,3 +87,30 @@ def build_agent_app(
         metrics_out = gr.Markdown()
         btn.click(_handler, inputs=[key, model, inp], outputs=[trace_out, metrics_out])
     return demo
+
+
+def _truncate(text: str, limit: int = 60) -> str:
+    text = text.replace("\n", " ")
+    return text if len(text) <= limit else text[: limit - 1] + "…"
+
+
+def render_trace_table(trace: Trace) -> str:
+    header = (
+        "| # | Step | Tokens | Cost | Latency | Content |\n"
+        "|---|------|-------|------|---------|---------|"
+    )
+    rows = [
+        f"| {i + 1} | {s.kind} | {s.tokens} | ${s.cost_usd:.4f}"
+        f" | {s.latency_ms} ms | {_truncate(s.content)} |"
+        for i, s in enumerate(trace.steps)
+    ]
+    return "\n".join([header, *rows])
+
+
+def cost_breakdown(trace: Trace) -> str:
+    by_kind: dict[str, float] = {}
+    for s in trace.steps:
+        by_kind[s.kind] = by_kind.get(s.kind, 0.0) + s.cost_usd
+    lines = [f"- **{kind}**: ${cost:.4f}" for kind, cost in by_kind.items()]
+    lines.append(f"- **total**: ${trace.total_cost():.4f}")
+    return "\n".join(lines)
