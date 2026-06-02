@@ -10,23 +10,30 @@ order: 1
 layer: "pattern"
 ---
 
-## The problem
+## The interview problem
 
-A single completion can't decide *mid-task* that it needs to search or compute —
-it commits to an answer in one shot. ReAct breaks that open: the model thinks,
-optionally calls a tool, observes the result, and repeats until it can answer.
+> "Implement an agent that answers questions needing both reasoning and external
+> lookups — without hardcoding the steps."
+
+## Why one prompt isn't enough
+
+A single completion can't decide *mid-task* that it needs to search or compute.
+It commits to an answer in one shot. ReAct breaks that open: the model thinks,
+optionally acts (calls a tool), observes the result, and repeats.
 
 ## The loop
 
 The whole pattern is a `while` loop over `chat()`: if the model returns tool
-calls, execute them and feed the results back as `tool` messages; otherwise the
-content is the final answer. Tools are described to the model as JSON schemas, so
-it chooses *which* to call and *with what arguments*.
+calls, execute them and append the results as `tool` messages; otherwise the
+content is the final answer. Tools are described to the model as JSON schemas,
+so it chooses *which* to call and *with what arguments*. The trace below makes
+each thought/action/observation visible.
 
 ## Tradeoffs
 
 - **Use it** when the tools needed vary per query and the path isn't known ahead.
-- **Avoid it** when the workflow is fixed — a hardcoded pipeline is cheaper.
+- **Avoid it** when the workflow is fixed — a hardcoded pipeline is cheaper and
+  more predictable (see the Observability case study for exactly that).
 - **Watch** runaway loops: always cap `max_steps`.
 
 Run it live below with your own OpenRouter key.

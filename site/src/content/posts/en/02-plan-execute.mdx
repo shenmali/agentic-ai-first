@@ -1,0 +1,36 @@
+---
+title: "Plan-Execute-Reflect: agents that revise their own work"
+description: "Draft a plan, execute it, then reflect and replan — for tasks a single loop drifts on."
+publishDate: 2026-06-02
+lang: en
+urlSlug: "plan-execute-reflect"
+spaceUrl: "https://mashen-agentic-plan-execute.hf.space"
+githubPath: "demos/02-plan-execute"
+order: 2
+layer: "pattern"
+---
+
+## The interview problem
+
+> "Design an agent for multi-step tasks where the first attempt often misses
+> requirements."
+
+## Why a flat loop drifts
+
+On long tasks a ReAct loop loses the thread — it optimizes the next step, not the
+whole goal. Separating *planning* from *doing* keeps the objective explicit.
+
+## The pattern
+
+Three roles, one loop: a **planner** turns the task into ordered steps; an
+**executor** runs each step (with tools); a **reflector** checks whether the goal
+is met and, if not, emits feedback that seeds a fresh plan. Bounded by
+`max_rounds`.
+
+## Tradeoffs
+
+- **Use it** for complex, requirement-heavy tasks where a first draft rarely suffices.
+- **Avoid it** for simple lookups — the extra planner/reflector calls are wasted cost.
+- **Watch** the round cap so reflection can't loop forever.
+
+Run it live below with your own OpenRouter key.

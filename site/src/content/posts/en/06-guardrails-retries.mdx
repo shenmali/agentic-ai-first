@@ -1,0 +1,35 @@
+---
+title: "Guardrails & retries: reliable output from an unreliable model"
+description: "Validate structured output against a schema and retry with feedback; block disallowed input at the boundary."
+publishDate: 2026-06-02
+lang: en
+urlSlug: "guardrails-retries"
+spaceUrl: "https://mashen-agentic-guardrails-retries.hf.space"
+githubPath: "demos/06-guardrails-retries"
+order: 6
+layer: "production"
+---
+
+## The interview problem
+
+> "Make an agent that returns reliable structured output and resists prompt
+> injection."
+
+## Why trusting the model fails
+
+Models return *almost*-valid JSON, drift from schemas, and follow injected
+instructions. You must verify at the boundary.
+
+## The pattern
+
+An **input guardrail** rejects over-long or disallowed prompts before any model
+call. The agent then generates JSON, **validates** it against a schema, and on
+failure **retries with the validation error fed back** — bounded by `max_retries`.
+
+## Tradeoffs
+
+- **Use it** whenever downstream code consumes the agent's output as data.
+- **Watch** latency/cost: cap retries, and prefer the provider's structured-output
+  mode when available as a first line of defense.
+
+Run it live below with your own OpenRouter key.

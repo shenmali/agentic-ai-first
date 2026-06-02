@@ -1,0 +1,36 @@
+---
+title: "Orchestrator-Workers: dividing a task across specialists"
+description: "A boss agent decomposes the task, dispatches specialist workers, and synthesizes their output."
+publishDate: 2026-06-02
+lang: en
+urlSlug: "orchestrator-workers"
+spaceUrl: "https://mashen-agentic-orchestrator-workers.hf.space"
+githubPath: "demos/03-orchestrator-workers"
+order: 3
+layer: "pattern"
+---
+
+## The interview problem
+
+> "How would you split a broad task across specialized agents and recombine the
+> results?"
+
+## Why one generalist falls short
+
+A single prompt asked to "cover everything" produces shallow, unfocused output.
+Specialization — a historian, an economist, an engineer — yields depth.
+
+## The pattern
+
+An **orchestrator** decomposes the task into independent subtasks, each tagged
+with a specialist role. Each **worker** is an LLM call under that role's system
+prompt. The orchestrator then **synthesizes** the worker outputs into one answer.
+
+## Tradeoffs
+
+- **Use it** for broad tasks that decompose cleanly into independent parts.
+- **Avoid it** for tightly coupled steps where workers would need to see each
+  other's output mid-flight.
+- **Watch** cost: it's `N + 2` model calls. Subtasks can run in parallel to cut latency.
+
+Run it live below with your own OpenRouter key.

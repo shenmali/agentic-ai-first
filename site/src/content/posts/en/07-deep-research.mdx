@@ -1,0 +1,36 @@
+---
+title: "Deep Research Agent: from a topic to a cited brief"
+description: "Plan sub-questions, search multiple sources, track citations, and synthesize a referenced report."
+publishDate: 2026-06-02
+lang: en
+urlSlug: "deep-research"
+spaceUrl: "https://mashen-agentic-deep-research.hf.space"
+githubPath: "demos/07-deep-research"
+order: 7
+layer: "flagship"
+---
+
+## The interview problem
+
+> "Build an agent that researches a topic and produces a brief you can actually
+> trust — with sources."
+
+## Why search-then-summarize isn't enough
+
+One query gives a shallow, uncited answer. Real research decomposes the topic and
+keeps track of where each claim came from.
+
+## The pattern
+
+A **planner** splits the topic into sub-questions. The agent **searches** each
+(DuckDuckGo by default, optional Tavily for quality), **tracks every source** with
+a numbered id, and a **synthesizer** writes a brief that cites sources inline as
+`[n]` with a sources list appended.
+
+## Tradeoffs
+
+- **Use it** when provenance matters and the topic spans several angles.
+- **Watch** cost: it grows with the number of sub-questions and sources.
+- **Swap** the search backend to trade cost for quality without touching the agent.
+
+Run it live below with your own OpenRouter key.

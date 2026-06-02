@@ -1,0 +1,35 @@
+---
+title: "Observability & tracing: debugging agents in production"
+description: "Capture tokens, cost, and latency per step — the instrumentation you need to debug and budget an agent."
+publishDate: 2026-06-02
+lang: en
+urlSlug: "observability-tracing"
+spaceUrl: "https://mashen-agentic-observability-tracing.hf.space"
+githubPath: "demos/05-observability-tracing"
+order: 5
+layer: "production"
+---
+
+## The interview problem
+
+> "Your agent is slow and expensive in production. How do you find out why?"
+
+## Why print statements aren't enough
+
+Agents make many model and tool calls. Without structured per-step data you can't
+see where the tokens, dollars, and milliseconds go.
+
+## The pattern
+
+Record a **Step** for every action with its tokens, estimated cost, and latency.
+Render the **trace as a table** plus a **cost breakdown by step kind**. This demo
+uses a fixed search→summarize pipeline so the trace is predictable — the point is
+the instrumentation, not the agent.
+
+## Tradeoffs
+
+- **Always worth it**: the overhead is negligible and it's the foundation for
+  cost control and evals.
+- **Extend it** with persistent storage and dashboards when you go multi-user.
+
+Run it live below with your own OpenRouter key.

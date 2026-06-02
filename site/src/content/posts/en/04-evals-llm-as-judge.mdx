@@ -1,0 +1,35 @@
+---
+title: "Evals & LLM-as-judge: knowing your agent is actually good"
+description: "Score answers against references with an LLM judge — the regression test for non-deterministic systems."
+publishDate: 2026-06-02
+lang: en
+urlSlug: "evals-llm-as-judge"
+spaceUrl: "https://mashen-agentic-evals-llm-as-judge.hf.space"
+githubPath: "demos/04-evals-llm-as-judge"
+order: 4
+layer: "production"
+---
+
+## The interview problem
+
+> "Your agent's output isn't deterministic. How do you measure quality and catch
+> regressions before users do?"
+
+## Why eyeballing fails
+
+Manual spot-checks don't scale and miss regressions. You need a repeatable score.
+
+## The pattern
+
+Hold a small **dataset** of inputs with reference answers. Run the system under
+test, then have an **LLM judge** score each answer against its reference (1–5,
+pass/fail), and **aggregate**. Run it in CI to gate changes.
+
+## Tradeoffs
+
+- **Use it** to track quality over time and block regressions automatically.
+- **Be aware** judges have bias and variance — pin the judge model, use a strict
+  rubric, and pair with exact-match checks where possible.
+- **Cheap to run**: a handful of cases costs cents.
+
+Run it live below with your own OpenRouter key.
