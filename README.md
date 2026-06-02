@@ -1,5 +1,7 @@
 # Agentic AI — Engineering Showcase
 
+[![CI](https://github.com/shenmali/agentic-ai-first/actions/workflows/ci.yml/badge.svg)](https://github.com/shenmali/agentic-ai-first/actions/workflows/ci.yml)
+
 Interview-grade agentic-AI problems, solved with modern techniques and runnable live (bring your own [OpenRouter](https://openrouter.ai/keys) key).
 
 - **Site:** https://agentic.mashen.dev
