@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { LOCALES, useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang);
+const layers = ['pattern', 'production', 'flagship'] as const;
+const posts = (await getCollection('posts', (p) => p.data.lang === lang)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+<BaseLayout lang={lang} title={t('site.title')} description={t('site.tagline')}>
+  <h1>{t('site.title')}</h1>
+  <p>{t('site.tagline')}</p>
+  {layers.map((layer) => {
+    const group = posts.filter((p) => p.data.layer === layer);
+    return group.length > 0 && (
+      <section>
+        <h2>{t(`layer.${layer}`)}</h2>
+        <ul>
+          {group.map((p) => (
+            <li><a href={`/${lang}/${p.slug}`}>{p.data.title}</a> — {p.data.description}</li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+</BaseLayout>

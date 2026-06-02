@@ -1,0 +1,32 @@
+---
+title: "ReAct from scratch: the reasoning + acting loop"
+description: "How agents interleave thinking and tool use — built from first principles."
+publishDate: 2026-06-02
+lang: en
+slug: "react-from-scratch"
+spaceUrl: "https://mashen-agentic-react-from-scratch.hf.space"
+githubPath: "demos/01-react-from-scratch"
+order: 1
+layer: "pattern"
+---
+
+## The problem
+
+A single completion can't decide *mid-task* that it needs to search or compute —
+it commits to an answer in one shot. ReAct breaks that open: the model thinks,
+optionally calls a tool, observes the result, and repeats until it can answer.
+
+## The loop
+
+The whole pattern is a `while` loop over `chat()`: if the model returns tool
+calls, execute them and feed the results back as `tool` messages; otherwise the
+content is the final answer. Tools are described to the model as JSON schemas, so
+it chooses *which* to call and *with what arguments*.
+
+## Tradeoffs
+
+- **Use it** when the tools needed vary per query and the path isn't known ahead.
+- **Avoid it** when the workflow is fixed — a hardcoded pipeline is cheaper.
+- **Watch** runaway loops: always cap `max_steps`.
+
+Run it live below with your own OpenRouter key.

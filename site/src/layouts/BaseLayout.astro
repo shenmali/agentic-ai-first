@@ -1,0 +1,25 @@
+---
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { LOCALES } from '../i18n/utils';
+interface Props { lang: string; title: string; description?: string; slug?: string }
+const { lang, title, description = '', slug } = Astro.props;
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {slug && LOCALES.map((l) => (
+      <link rel="alternate" hreflang={l} href={`${site}/${l}/${slug}`} />
+    ))}
+    {slug && <link rel="alternate" hreflang="x-default" href={`${site}/en/${slug}`} />}
+  </head>
+  <body>
+    <header><a href={`/${lang}/`}>agentic.mashen.dev</a><LanguageSwitcher current={lang} /></header>
+    <main><slot /></main>
+    <footer><small>© mashen.dev · <a href="https://github.com/mashen/agentic-ai">Source on GitHub</a></small></footer>
+  </body>
+</html>

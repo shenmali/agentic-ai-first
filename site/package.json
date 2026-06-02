@@ -1,0 +1,18 @@
+{
+  "name": "agentic-ai-site",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^4.15.0",
+    "@astrojs/mdx": "^3.1.0",
+    "@astrojs/check": "^0.9.0",
+    "@astrojs/sitemap": "^3.1.0",
+    "typescript": "^5.5.0"
+  }
+}

@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import SpaceEmbed from '../components/SpaceEmbed.astro';
+import { useTranslations } from '../i18n/utils';
+interface Props { entry: CollectionEntry<'posts'>; isFallback?: boolean }
+const { entry, isFallback = false } = Astro.props;
+const { title, description, lang, spaceUrl, githubPath } = entry.data;
+const slug = entry.slug;
+const t = useTranslations(lang);
+---
+<BaseLayout lang={lang} title={title} description={description} slug={slug}>
+  <article>
+    <h1>{title}</h1>
+    {isFallback && <p class="banner">{t('post.notTranslated')}</p>}
+    <slot />
+    <h2>{t('cta.tryDemo')}</h2>
+    <SpaceEmbed src={spaceUrl} />
+    <p><a href={`https://github.com/mashen/agentic-ai/tree/main/${githubPath}`}>{t('cta.readCode')} →</a></p>
+  </article>
+</BaseLayout>

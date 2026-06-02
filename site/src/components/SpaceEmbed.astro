@@ -1,0 +1,14 @@
+---
+interface Props { src: string }
+const { src } = Astro.props;
+---
+<iframe
+  src={src}
+  title="Live demo"
+  width="100%"
+  height="760"
+  frameborder="0"
+  allow="clipboard-write"
+  loading="lazy"
+></iframe>
+<p><small>The demo may take ~30s to wake from sleep on first load.</small></p>

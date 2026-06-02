@@ -1,0 +1,12 @@
+---
+import { LOCALES } from '../i18n/utils';
+interface Props { current: string }
+const { current } = Astro.props;
+const path = Astro.url.pathname;
+const rest = path.replace(/^\/(en|tr|nl)/, '');
+---
+<nav class="lang-switcher">
+  {LOCALES.map((l) => (
+    <a href={`/${l}${rest || '/'}`} aria-current={l === current ? 'page' : undefined}>{l.toUpperCase()}</a>
+  ))}
+</nav>
