@@ -20,3 +20,6 @@ dist/
 # Secrets
 *.key
 .env.local
+
+# Claude Code (local/personal)
+.claude/settings.local.json
