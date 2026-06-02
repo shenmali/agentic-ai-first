@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check demos scripts
+      - name: Test _core
+        working-directory: demos
+        run: PYTHONPATH=. pytest _core/tests -q
+      - name: Test scripts
+        run: PYTHONPATH=. pytest scripts/tests -q
+      - name: Test demos
+        run: |
+          set -e
+          for d in demos/[0-9]*/; do
+            echo "::group::Testing $d"
+            (cd "$d" && PYTHONPATH="..:." pytest -q)
+            echo "::endgroup::"
+          done
+
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - working-directory: site
+        run: npm ci
+      - working-directory: site
+        run: npm run check
