@@ -24,7 +24,7 @@ const posts = (await getCollection('posts', (p) => p.data.lang === lang)).sort(
         <h2>{t(`layer.${layer}`)}</h2>
         <ul>
           {group.map((p) => (
-            <li><a href={`/${lang}/${p.slug}`}>{p.data.title}</a> — {p.data.description}</li>
+            <li><a href={`/${lang}/${p.data.urlSlug}`}>{p.data.title}</a> — {p.data.description}</li>
           ))}
         </ul>
       </section>

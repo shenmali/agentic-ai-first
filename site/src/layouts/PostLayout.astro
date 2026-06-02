@@ -5,8 +5,8 @@ import SpaceEmbed from '../components/SpaceEmbed.astro';
 import { useTranslations } from '../i18n/utils';
 interface Props { entry: CollectionEntry<'posts'>; isFallback?: boolean }
 const { entry, isFallback = false } = Astro.props;
-const { title, description, lang, spaceUrl, githubPath } = entry.data;
-const slug = entry.slug;
+const { title, description, lang, spaceUrl, githubPath, urlSlug } = entry.data;
+const slug = urlSlug;
 const t = useTranslations(lang);
 ---
 <BaseLayout lang={lang} title={title} description={description} slug={slug}>

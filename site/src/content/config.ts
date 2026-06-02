@@ -7,6 +7,7 @@ const posts = defineCollection({
     description: z.string(),
     publishDate: z.coerce.date(),
     lang: z.enum(['en', 'tr', 'nl']),
+    urlSlug: z.string(), // routing slug; `slug` is reserved by Astro content collections
     spaceUrl: z.string().url(),
     githubPath: z.string(),
     order: z.number(),
