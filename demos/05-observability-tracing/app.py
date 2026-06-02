@@ -1,5 +1,4 @@
 import gradio as gr
-
 from _core.llm import LLMClient
 from _core.tools import ToolRegistry, make_web_search
 from _core.tracer import Trace
