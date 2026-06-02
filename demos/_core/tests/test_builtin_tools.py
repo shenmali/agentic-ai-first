@@ -18,3 +18,11 @@ def test_make_calculator_returns_named_tool():
 def test_make_web_search_returns_named_tool():
     tool = make_web_search()
     assert tool.name == "web_search"
+
+
+def test_calculator_rejects_exponent_bomb():
+    assert calculate("9**9**9").startswith("Error")
+
+
+def test_calculator_allows_small_exponent():
+    assert calculate("2**10") == "1024"
