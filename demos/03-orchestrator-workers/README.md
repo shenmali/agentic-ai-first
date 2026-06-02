@@ -13,4 +13,4 @@ pinned: false
 
 Decompose → dispatch to specialist workers → synthesize. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/03-orchestrator-workers
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/03-orchestrator-workers

@@ -13,4 +13,4 @@ pinned: true
 
 Plan → multi-source search → cited synthesis. DuckDuckGo by default, optional Tavily. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/07-deep-research
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/07-deep-research

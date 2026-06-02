@@ -331,7 +331,7 @@ pinned: false
 
 Plan → execute (with tools) → reflect → replan. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/02-plan-execute
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/02-plan-execute
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -532,7 +532,7 @@ pinned: false
 
 Decompose → dispatch to specialist workers → synthesize. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/03-orchestrator-workers
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/03-orchestrator-workers
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -741,7 +741,7 @@ pinned: false
 
 Score model answers against references with an LLM judge. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/04-evals-llm-as-judge
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/04-evals-llm-as-judge
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -951,7 +951,7 @@ pinned: false
 
 Trace table + cost breakdown for every agent step. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/05-observability-tracing
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/05-observability-tracing
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -1193,7 +1193,7 @@ pinned: false
 
 Input guardrail + schema-validated output with retry-on-failure. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/06-guardrails-retries
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/06-guardrails-retries
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -1470,7 +1470,7 @@ pinned: true
 
 Plan → multi-source search → cited synthesis. DuckDuckGo by default, optional Tavily. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/07-deep-research
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/07-deep-research
 ```
 
 - [ ] **Step 4: Run test to verify it passes**

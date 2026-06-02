@@ -13,4 +13,4 @@ pinned: false
 
 Plan → execute (with tools) → reflect → replan. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/02-plan-execute
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/02-plan-execute

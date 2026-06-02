@@ -53,7 +53,7 @@ agentic.mashen.dev            huggingface.co/spaces/mashen/agentic-<demo>
         │                           ▼
         │                     OpenRouter (visitor's key)
         │
-GitHub: github.com/mashen/agentic-ai  (public monorepo)
+GitHub: github.com/shenmali/agentic-ai-first  (public monorepo)
  • /site            Astro source
  • /demos           7 Python Space sources
  • /demos/_core     shared LLM / tool / trace / UI helpers

@@ -13,4 +13,4 @@ pinned: false
 
 Input guardrail + schema-validated output with retry-on-failure. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/06-guardrails-retries
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/06-guardrails-retries

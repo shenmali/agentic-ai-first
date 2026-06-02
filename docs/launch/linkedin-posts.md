@@ -9,7 +9,7 @@ to one article (problem → solution → live demo). Mix EN and TR posts.
 > key — multi-model). First three case studies are up: ReAct from scratch,
 > Plan-Execute-Reflect, and Evals with LLM-as-judge.
 > 👉 https://agentic.mashen.dev
-> Code (MIT): https://github.com/mashen/agentic-ai
+> Code (MIT): https://github.com/shenmali/agentic-ai-first
 
 ## Post 1 — ReAct from scratch
 Hook: "Most 'agents' are one prompt in a trench coat. Here's the actual loop." +

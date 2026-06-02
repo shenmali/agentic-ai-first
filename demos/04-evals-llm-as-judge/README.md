@@ -13,4 +13,4 @@ pinned: false
 
 Score model answers against references with an LLM judge. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/04-evals-llm-as-judge
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/04-evals-llm-as-judge

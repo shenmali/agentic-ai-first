@@ -14,4 +14,4 @@ pinned: false
 A Reasoning + Acting agent built from first principles, with a transparent
 step-by-step trace. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/01-react-from-scratch
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/01-react-from-scratch

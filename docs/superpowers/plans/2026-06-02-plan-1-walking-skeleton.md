@@ -1052,7 +1052,7 @@ pinned: false
 A Reasoning + Acting agent built from first principles, with a transparent
 step-by-step trace. Bring your own [OpenRouter](https://openrouter.ai/keys) key.
 
-Source & write-up: https://github.com/mashen/agentic-ai/tree/main/demos/01-react-from-scratch
+Source & write-up: https://github.com/shenmali/agentic-ai-first/tree/main/demos/01-react-from-scratch
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -1514,7 +1514,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   <body>
     <header><a href={`/${lang}/`}>agentic.mashen.dev</a><LanguageSwitcher current={lang} /></header>
     <main><slot /></main>
-    <footer><small>© mashen.dev · <a href="https://github.com/mashen/agentic-ai">Source on GitHub</a></small></footer>
+    <footer><small>© mashen.dev · <a href="https://github.com/shenmali/agentic-ai-first">Source on GitHub</a></small></footer>
   </body>
 </html>
 ```
@@ -1539,7 +1539,7 @@ const t = useTranslations(lang);
     <slot />
     <h2>{t('cta.tryDemo')}</h2>
     <SpaceEmbed src={spaceUrl} />
-    <p><a href={`https://github.com/mashen/agentic-ai/tree/main/${githubPath}`}>{t('cta.readCode')} →</a></p>
+    <p><a href={`https://github.com/shenmali/agentic-ai-first/tree/main/${githubPath}`}>{t('cta.readCode')} →</a></p>
   </article>
 </BaseLayout>
 ```
@@ -1665,7 +1665,7 @@ calls a tool, reads the result, and repeats until it can answer.
 
 The whole pattern is a `while` loop over `chat()` calls: if the model returns
 tool calls, execute them and feed results back; otherwise, that's the final
-answer. See [`agent.py`](https://github.com/mashen/agentic-ai/tree/main/demos/01-react-from-scratch/agent.py).
+answer. See [`agent.py`](https://github.com/shenmali/agentic-ai-first/tree/main/demos/01-react-from-scratch/agent.py).
 
 ## Tradeoffs
 
