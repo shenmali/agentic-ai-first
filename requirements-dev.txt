@@ -1,5 +1,5 @@
 pytest>=8.0
 ruff>=0.6
-gradio>=4.44
+gradio>=4.44,<5
 openai>=1.40
 ddgs>=6.0
