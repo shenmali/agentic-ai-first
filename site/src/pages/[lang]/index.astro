@@ -9,23 +9,35 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = useTranslations(lang);
+const all = await getCollection('posts');
+const canonical = all
+  .filter((p) => p.data.lang === 'en')
+  .sort((a, b) => a.data.order - b.data.order);
+
+function localized(slug: string) {
+  return (
+    all.find((p) => p.data.urlSlug === slug && p.data.lang === lang) ??
+    all.find((p) => p.data.urlSlug === slug && p.data.lang === 'en')!
+  );
+}
+
 const layers = ['pattern', 'production', 'flagship'] as const;
-const posts = (await getCollection('posts', (p) => p.data.lang === lang)).sort(
-  (a, b) => a.data.order - b.data.order,
-);
 ---
 <BaseLayout lang={lang} title={t('site.title')} description={t('site.tagline')}>
   <h1>{t('site.title')}</h1>
   <p>{t('site.tagline')}</p>
   {layers.map((layer) => {
-    const group = posts.filter((p) => p.data.layer === layer);
+    const group = canonical.filter((p) => p.data.layer === layer);
     return group.length > 0 && (
       <section>
         <h2>{t(`layer.${layer}`)}</h2>
         <ul>
-          {group.map((p) => (
-            <li><a href={`/${lang}/${p.data.urlSlug}`}>{p.data.title}</a> — {p.data.description}</li>
-          ))}
+          {group.map((p) => {
+            const loc = localized(p.data.urlSlug);
+            return (
+              <li><a href={`/${lang}/${p.data.urlSlug}`}>{loc.data.title}</a> — {loc.data.description}</li>
+            );
+          })}
         </ul>
       </section>
     );

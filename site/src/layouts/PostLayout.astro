@@ -3,9 +3,9 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import SpaceEmbed from '../components/SpaceEmbed.astro';
 import { useTranslations } from '../i18n/utils';
-interface Props { entry: CollectionEntry<'posts'>; isFallback?: boolean }
-const { entry, isFallback = false } = Astro.props;
-const { title, description, lang, spaceUrl, githubPath, urlSlug } = entry.data;
+interface Props { entry: CollectionEntry<'posts'>; lang: string; isFallback?: boolean }
+const { entry, lang, isFallback = false } = Astro.props;
+const { title, description, spaceUrl, githubPath, urlSlug } = entry.data;
 const slug = urlSlug;
 const t = useTranslations(lang);
 ---

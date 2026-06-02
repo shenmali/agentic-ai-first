@@ -1,18 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
+import { LOCALES } from '../../i18n/utils';
 
 export async function getStaticPaths() {
   const all = await getCollection('posts');
-  return all.map((entry) => ({
-    params: { lang: entry.data.lang, slug: entry.data.urlSlug },
-    props: { entry },
-  }));
+  const bySlug = new Map<string, Map<string, (typeof all)[number]>>();
+  for (const entry of all) {
+    if (!bySlug.has(entry.data.urlSlug)) bySlug.set(entry.data.urlSlug, new Map());
+    bySlug.get(entry.data.urlSlug)!.set(entry.data.lang, entry);
+  }
+  return [...bySlug.entries()].flatMap(([slug, byLang]) => {
+    const en = byLang.get('en');
+    return LOCALES.flatMap((lang) => {
+      const entry = byLang.get(lang) ?? en;
+      if (!entry) return [];
+      return [{ params: { lang, slug }, props: { entry, lang, isFallback: !byLang.has(lang) } }];
+    });
+  });
 }
 
-const { entry } = Astro.props;
+const { entry, lang, isFallback } = Astro.props;
 const { Content } = await entry.render();
 ---
-<PostLayout entry={entry}>
+<PostLayout entry={entry} lang={lang} isFallback={isFallback}>
   <Content />
 </PostLayout>
