@@ -7,7 +7,12 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
+      - name: Skip if no HF token
+        if: ${{ env.HF_TOKEN == '' }}
+        run: echo "HF_TOKEN not set — skipping Space sync. Add the secret to enable."
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
@@ -16,7 +21,7 @@ jobs:
           python-version: '3.11'
       - run: pip install "huggingface_hub>=0.24,<1.0"
       - name: Sync changed demos
+        if: ${{ env.HF_TOKEN != '' }}
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_USER: mashen
         run: python -m scripts.sync_spaces
