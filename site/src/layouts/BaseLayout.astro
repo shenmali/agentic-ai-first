@@ -12,6 +12,14 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={`${site}${Astro.url.pathname}`} />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:site_name" content="agentic.mashen.dev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
     {slug && LOCALES.map((l) => (
       <link rel="alternate" hreflang={l} href={`${site}/${l}/${slug}`} />
     ))}
