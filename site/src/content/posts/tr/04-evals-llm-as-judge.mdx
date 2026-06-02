@@ -1,0 +1,36 @@
+---
+title: "Evals & LLM-as-judge: agent'ının gerçekten iyi olduğunu bilmek"
+description: "Cevapları bir LLM jüriyle referansa karşı puanla — deterministik olmayan sistemlerin regresyon testi."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "evals-llm-as-judge"
+spaceUrl: "https://mashen-agentic-evals-llm-as-judge.hf.space"
+githubPath: "demos/04-evals-llm-as-judge"
+order: 4
+layer: "production"
+---
+
+## Mülakat problemi
+
+> "Agent'ının çıktısı deterministik değil. Kaliteyi nasıl ölçer ve regresyonları
+> kullanıcılardan önce nasıl yakalarsın?"
+
+## Neden göz kararı yetmez
+
+Elle yapılan tek tük kontroller ölçeklenmez ve regresyonları kaçırır.
+Tekrarlanabilir bir skora ihtiyacın var.
+
+## Desen
+
+Referans cevapları olan küçük bir **dataset** tut. Test edilen sistemi çalıştır,
+sonra bir **LLM jüri** her cevabı referansına karşı puanlasın (1–5, geçti/kaldı) ve
+**topla**. Değişiklikleri kapıda tutmak için CI'da çalıştır.
+
+## Dengeler
+
+- **Kullan**: kaliteyi zaman içinde izlemek ve regresyonları otomatik engellemek için.
+- **Farkında ol**: jürilerin önyargısı ve varyansı vardır — jüri modelini sabitle,
+  katı bir rubrik kullan, mümkünse tam-eşleşme kontrolleriyle birleştir.
+- **Ucuza koşar**: bir avuç vaka birkaç sent tutar.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.

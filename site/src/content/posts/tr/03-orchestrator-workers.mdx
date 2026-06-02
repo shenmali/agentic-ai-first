@@ -1,0 +1,37 @@
+---
+title: "Orchestrator-Workers: görevi uzmanlara bölmek"
+description: "Bir patron agent görevi parçalar, uzman worker'lara dağıtır ve çıktılarını sentezler."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "orchestrator-workers"
+spaceUrl: "https://mashen-agentic-orchestrator-workers.hf.space"
+githubPath: "demos/03-orchestrator-workers"
+order: 3
+layer: "pattern"
+---
+
+## Mülakat problemi
+
+> "Geniş bir görevi uzmanlaşmış agent'lara nasıl böler ve sonuçları nasıl
+> birleştirirsin?"
+
+## Neden tek bir genelci yetersiz kalır
+
+"Her şeyi kapsa" denen tek bir prompt yüzeysel, odaksız çıktı üretir.
+Uzmanlaşma — bir tarihçi, bir ekonomist, bir mühendis — derinlik getirir.
+
+## Desen
+
+Bir **orchestrator** görevi bağımsız alt görevlere böler, her birini bir uzman
+rolüyle etiketler. Her **worker**, o rolün sistem prompt'u altında bir LLM
+çağrısıdır. Orchestrator ardından worker çıktılarını tek bir cevaba **sentezler**.
+
+## Dengeler
+
+- **Kullan**: bağımsız parçalara temiz biçimde ayrılan geniş görevlerde.
+- **Kullanma**: worker'ların birbirinin çıktısını anında görmesi gereken sıkı
+  bağlı adımlarda.
+- **Dikkat**: maliyet `N + 2` model çağrısıdır. Alt görevler gecikmeyi azaltmak
+  için paralel koşturulabilir.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.

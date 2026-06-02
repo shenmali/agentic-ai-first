@@ -1,0 +1,36 @@
+---
+title: "Plan-Execute-Reflect: kendi işini gözden geçiren agent'lar"
+description: "Bir plan çıkar, uygula, sonra değerlendir ve yeniden planla — tek döngünün savrulduğu görevler için."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "plan-execute-reflect"
+spaceUrl: "https://mashen-agentic-plan-execute.hf.space"
+githubPath: "demos/02-plan-execute"
+order: 2
+layer: "pattern"
+---
+
+## Mülakat problemi
+
+> "İlk denemenin sık sık gereksinimleri kaçırdığı çok adımlı görevler için bir
+> agent tasarla."
+
+## Neden düz bir döngü savrulur
+
+Uzun görevlerde bir ReAct döngüsü ipi kaçırır — bütün hedefi değil, bir sonraki
+adımı optimize eder. *Planlamayı* *yapmaktan* ayırmak hedefi açık tutar.
+
+## Desen
+
+Üç rol, tek döngü: bir **planner** görevi sıralı adımlara çevirir; bir
+**executor** her adımı (araçlarla) çalıştırır; bir **reflector** hedefe ulaşılıp
+ulaşılmadığını kontrol eder ve ulaşılmadıysa yeni bir planı besleyen geri bildirim
+üretir. `max_rounds` ile sınırlıdır.
+
+## Dengeler
+
+- **Kullan**: ilk taslağın nadiren yettiği, gereksinim yoğun karmaşık görevlerde.
+- **Kullanma**: basit aramalarda — fazladan planner/reflector çağrıları boşa maliyet.
+- **Dikkat**: yansımanın sonsuz dönmemesi için tur sınırına.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.

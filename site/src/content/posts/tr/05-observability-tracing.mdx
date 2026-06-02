@@ -1,0 +1,34 @@
+---
+title: "Observability & tracing: production'da agent hata ayıklama"
+description: "Adım başına token, maliyet ve gecikmeyi yakala — bir agent'ı debug etmek ve bütçelemek için gereken enstrümantasyon."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "observability-tracing"
+spaceUrl: "https://mashen-agentic-observability-tracing.hf.space"
+githubPath: "demos/05-observability-tracing"
+order: 5
+layer: "production"
+---
+
+## Mülakat problemi
+
+> "Agent'ın production'da yavaş ve pahalı. Nedenini nasıl bulursun?"
+
+## Neden print ifadeleri yetmez
+
+Agent'lar çok sayıda model ve araç çağrısı yapar. Adım başına yapılandırılmış veri
+olmadan token'ların, dolarların ve milisaniyelerin nereye gittiğini göremezsin.
+
+## Desen
+
+Her eylem için token'ı, tahmini maliyeti ve gecikmesiyle bir **Step** kaydet.
+**Trace'i bir tablo** olarak ve **adım türüne göre maliyet kırılımı** olarak
+render et. Bu demo sabit bir arama→özetleme pipeline'ı kullanır, böylece trace
+öngörülebilirdir — mesele agent değil, enstrümantasyon.
+
+## Dengeler
+
+- **Her zaman değer**: ek yük ihmal edilebilir ve maliyet kontrolü ile eval'lerin temeli.
+- **Genişlet**: çok kullanıcıya geçtiğinde kalıcı depolama ve dashboard'larla.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.

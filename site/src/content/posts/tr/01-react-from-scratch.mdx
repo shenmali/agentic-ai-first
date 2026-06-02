@@ -1,0 +1,37 @@
+---
+title: "Sıfırdan ReAct: akıl yürütme + eylem döngüsü"
+description: "Agent'lar düşünmeyi ve araç kullanımını nasıl iç içe geçirir — ilk prensiplerden inşa edildi."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "react-from-scratch"
+spaceUrl: "https://mashen-agentic-react-from-scratch.hf.space"
+githubPath: "demos/01-react-from-scratch"
+order: 1
+layer: "pattern"
+---
+
+## Mülakat problemi
+
+> "Hem akıl yürütme hem de dış kaynaklardan veri çekme gerektiren soruları —
+> adımları sabit kodlamadan — yanıtlayan bir agent yaz."
+
+## Neden tek bir prompt yetmez
+
+Tek seferlik bir tamamlama, görev *ortasında* arama ya da hesap yapması
+gerektiğine karar veremez; cevabı tek hamlede verir. ReAct bunu açar: model
+düşünür, gerekirse bir araç çağırır, sonucu gözlemler ve tekrarlar.
+
+## Döngü
+
+Tüm desen `chat()` üzerinde dönen bir `while` döngüsüdür: model araç çağrısı
+döndürürse onları çalıştırıp sonuçları `tool` mesajı olarak ekleriz; aksi halde
+içerik nihai cevaptır. Araçlar modele JSON şeması olarak tanıtılır, böylece
+*hangisini* ve *hangi argümanlarla* çağıracağını model seçer.
+
+## Dengeler (tradeoff)
+
+- **Kullan**: gereken araçlar sorgudan sorguya değişiyorsa ve yol önceden belli değilse.
+- **Kullanma**: akış sabitse — sabit kodlanmış bir pipeline daha ucuz ve öngörülebilir.
+- **Dikkat**: kontrolden çıkan döngülere karşı her zaman `max_steps` koy.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.

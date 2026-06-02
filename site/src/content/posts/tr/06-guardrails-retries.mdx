@@ -1,0 +1,36 @@
+---
+title: "Guardrails & retries: güvenilmez bir modelden güvenilir çıktı"
+description: "Yapılandırılmış çıktıyı bir şemaya karşı doğrula ve geri bildirimle yeniden dene; izinsiz girdiyi sınırda engelle."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "guardrails-retries"
+spaceUrl: "https://mashen-agentic-guardrails-retries.hf.space"
+githubPath: "demos/06-guardrails-retries"
+order: 6
+layer: "production"
+---
+
+## Mülakat problemi
+
+> "Güvenilir yapılandırılmış çıktı veren ve prompt injection'a direnen bir agent
+> yap."
+
+## Neden modele güvenmek başarısız olur
+
+Modeller *neredeyse* geçerli JSON döndürür, şemalardan sapar ve enjekte edilen
+talimatları izler. Sınırda doğrulamak zorundasın.
+
+## Desen
+
+Bir **input guardrail**, herhangi bir model çağrısından önce aşırı uzun veya
+izinsiz prompt'ları reddeder. Agent ardından JSON üretir, onu bir şemaya karşı
+**doğrular** ve başarısız olursa **doğrulama hatasını geri besleyerek yeniden
+dener** — `max_retries` ile sınırlı.
+
+## Dengeler
+
+- **Kullan**: agent'ın çıktısını veri olarak tüketen aşağı akış kodu olduğunda.
+- **Dikkat**: gecikme/maliyet — denemeleri sınırla ve mümkünse ilk savunma hattı
+  olarak sağlayıcının yapılandırılmış-çıktı modunu tercih et.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.

@@ -1,0 +1,36 @@
+---
+title: "Deep Research Agent: bir konudan atıflı bir brief'e"
+description: "Alt sorular planla, birden çok kaynak ara, atıfları izle ve referanslı bir rapor sentezle."
+publishDate: 2026-06-02
+lang: tr
+urlSlug: "deep-research"
+spaceUrl: "https://mashen-agentic-deep-research.hf.space"
+githubPath: "demos/07-deep-research"
+order: 7
+layer: "flagship"
+---
+
+## Mülakat problemi
+
+> "Bir konuyu araştırıp gerçekten güvenebileceğin bir brief — kaynaklarıyla —
+> üreten bir agent yap."
+
+## Neden ara-sonra-özetle yetmez
+
+Tek bir sorgu yüzeysel, atıfsız bir cevap verir. Gerçek araştırma konuyu parçalar
+ve her iddianın nereden geldiğini izler.
+
+## Desen
+
+Bir **planner** konuyu alt sorulara böler. Agent her birini **arar** (varsayılan
+DuckDuckGo, kalite için opsiyonel Tavily), numaralı bir id ile **her kaynağı
+izler** ve bir **synthesizer** kaynakları satır içinde `[n]` olarak gösteren,
+sonuna bir kaynak listesi ekleyen bir brief yazar.
+
+## Dengeler
+
+- **Kullan**: kaynak gösterimi önemliyse ve konu birden çok açıyı kapsıyorsa.
+- **Dikkat**: maliyet alt soru ve kaynak sayısıyla büyür.
+- **Değiştir**: agent'a dokunmadan, maliyet/kalite dengesi için arama backend'ini.
+
+Aşağıda kendi OpenRouter anahtarınla canlı dene.
