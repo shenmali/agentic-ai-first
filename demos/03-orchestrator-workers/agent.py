@@ -34,8 +34,22 @@ class OrchestratorAgent:
     def run(self, task: str) -> Iterator[Step]:
         resp, lat, cost = self._ask(ORCH_PROMPT, task)
         try:
-            subtasks = json.loads(resp.content or "[]")[: self.max_workers]
+            parsed = json.loads(resp.content or "[]")
         except json.JSONDecodeError:
+            parsed = []
+        # Coerce whatever the model returned into a list of {role, subtask} dicts —
+        # small models often return a bare string array or a single object.
+        if not isinstance(parsed, list):
+            parsed = [parsed]
+        subtasks = []
+        for item in parsed[: self.max_workers]:
+            if isinstance(item, dict):
+                subtasks.append(
+                    {"role": item.get("role", "specialist"), "subtask": item.get("subtask", task)}
+                )
+            else:
+                subtasks.append({"role": "generalist", "subtask": str(item)})
+        if not subtasks:
             subtasks = [{"role": "generalist", "subtask": task}]
         yield Step(
             kind="thought",

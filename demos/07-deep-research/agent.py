@@ -36,8 +36,11 @@ class DeepResearchAgent:
     def run(self, topic: str) -> Iterator[Step]:
         resp, lat, cost = self._ask(PLAN_PROMPT, topic)
         try:
-            subqs = json.loads(resp.content or "[]")[: self.max_subquestions]
+            parsed = json.loads(resp.content or "[]")
         except json.JSONDecodeError:
+            parsed = []
+        subqs = parsed[: self.max_subquestions] if isinstance(parsed, list) else []
+        if not subqs:
             subqs = [topic]
         yield Step(
             kind="thought",
@@ -58,14 +61,14 @@ class DeepResearchAgent:
             yield Step(
                 kind="observation",
                 content="\n".join(
-                    f"[{i}] {sources[i - 1]['title']}: {sources[i - 1].get('body', '')}"
+                    f"[{i}] {sources[i - 1].get('title', '')}: {sources[i - 1].get('body', '')}"
                     for i in ids
                 )
                 or "No results.",
             )
 
         source_list = "\n".join(
-            f"[{i + 1}] {s['title']} — {s.get('url', '')}" for i, s in enumerate(sources)
+            f"[{i + 1}] {s.get('title', '')} — {s.get('url', '')}" for i, s in enumerate(sources)
         )
         fresp, flat, fcost = self._ask(
             SYNTH_PROMPT, f"Topic: {topic}\nNumbered sources:\n{source_list}"

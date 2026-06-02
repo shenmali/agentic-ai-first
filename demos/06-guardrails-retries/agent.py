@@ -26,6 +26,8 @@ def input_guardrail(text: str) -> str | None:
 
 
 def validate(payload: dict) -> list[str]:
+    if not isinstance(payload, dict):
+        return ["output must be a JSON object"]
     errors: list[str] = []
     if not isinstance(payload.get("name"), str):
         errors.append("'name' must be a string")

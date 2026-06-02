@@ -36,6 +36,21 @@ def test_orchestrator_dispatches_workers_then_synthesizes():
     assert "Combined synthesis" in steps[-1].content
 
 
+def test_orchestrator_handles_bare_string_array():
+    # Small models often return ["...", "..."] instead of [{"role","subtask"}].
+    scripted = _ScriptedLLM([
+        LLMResponse(
+            content='["history of X", "economics of X"]', prompt_tokens=5, completion_tokens=5
+        ),
+        LLMResponse(content="worker one", prompt_tokens=5, completion_tokens=5),
+        LLMResponse(content="worker two", prompt_tokens=5, completion_tokens=5),
+        LLMResponse(content="synthesis", prompt_tokens=5, completion_tokens=5),
+    ])
+    steps = list(OrchestratorAgent(llm=scripted).run("Explain X"))
+    assert len([s for s in steps if s.kind == "action"]) == 2
+    assert steps[-1].kind == "final"
+
+
 def test_app_builds():
     import app
 
