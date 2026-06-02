@@ -300,6 +300,14 @@ def test_make_calculator_returns_named_tool():
 def test_make_web_search_returns_named_tool():
     tool = make_web_search()
     assert tool.name == "web_search"
+
+
+def test_calculator_rejects_exponent_bomb():
+    assert calculate("9**9**9").startswith("Error")
+
+
+def test_calculator_allows_small_exponent():
+    assert calculate("2**10") == "1024"
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -324,11 +332,15 @@ _SAFE_OPS = {
 }
 
 
-def _safe_eval(node: ast.AST) -> float:
+def _safe_eval(node: ast.AST) -> int | float:
     if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
         return node.value
     if isinstance(node, ast.BinOp) and type(node.op) in _SAFE_OPS:
-        return _SAFE_OPS[type(node.op)](_safe_eval(node.left), _safe_eval(node.right))
+        left = _safe_eval(node.left)
+        right = _safe_eval(node.right)
+        if isinstance(node.op, ast.Pow) and abs(right) > 100:
+            raise ValueError("exponent too large")  # prevent 9**9**9 DoS
+        return _SAFE_OPS[type(node.op)](left, right)
     if isinstance(node, ast.UnaryOp) and type(node.op) in _SAFE_OPS:
         return _SAFE_OPS[type(node.op)](_safe_eval(node.operand))
     raise ValueError("unsupported expression")
@@ -383,7 +395,7 @@ def make_web_search() -> Tool:
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `cd demos && PYTHONPATH=. pytest _core/tests/test_builtin_tools.py -v`
-Expected: PASS (4 passed). The web_search test only constructs the Tool — it does NOT hit the network.
+Expected: PASS (6 passed). The web_search test only constructs the Tool — it does NOT hit the network.
 
 - [ ] **Step 5: Commit**
 
