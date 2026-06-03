@@ -14,7 +14,8 @@ def all_demo_names() -> list[str]:
 
 
 def classify_targets(changed: list[str], all_demos: list[str]) -> list[str]:
-    if any(c.startswith("demos/_core/") for c in changed):
+    # A change to the shared core or the sync mechanism itself → redeploy everything.
+    if any(c.startswith("demos/_core/") or c == "scripts/sync_spaces.py" for c in changed):
         return list(all_demos)
     touched = []
     for name in all_demos:
@@ -53,29 +54,58 @@ def _space_id(hf_user: str, demo_name: str) -> str:
 
 def main() -> None:
     from huggingface_hub import HfApi
+    from huggingface_hub.utils import HfHubHTTPError
 
     hf_user = os.environ["HF_USER"]
     token = os.environ["HF_TOKEN"]
     api = HfApi()
+
+    # Fail fast with an actionable message if the token is invalid / wrong scope.
+    try:
+        who = api.whoami(token=token)
+        print(f"Authenticated to HuggingFace as: {who.get('name')} (target namespace: {hf_user})")
+    except Exception as e:
+        print(f"ERROR: HF token is invalid or lacks access: {e}")
+        print(
+            "Fix: create a WRITE token at https://huggingface.co/settings/tokens and store "
+            "it as the HF_TOKEN repository secret."
+        )
+        raise SystemExit(1) from e
 
     targets = classify_targets(_changed_paths(), all_demo_names())
     if not targets:
         print("No demo changes to sync.")
         return
 
+    failures: list[str] = []
     for name in targets:
         space_id = _space_id(hf_user, name)
         print(f"Syncing {name} -> {space_id}")
-        api.create_repo(
-            repo_id=space_id, repo_type="space", space_sdk="gradio", exist_ok=True, token=token
-        )
-        with tempfile.TemporaryDirectory() as tmp:
-            tmp_path = Path(tmp)
-            _copy_tree(DEMOS / name, tmp_path)
-            _copy_tree(DEMOS / "_core", tmp_path / "_core")
-            api.upload_folder(
-                repo_id=space_id, repo_type="space", folder_path=str(tmp_path), token=token
+        try:
+            api.create_repo(
+                repo_id=space_id, repo_type="space", space_sdk="gradio", exist_ok=True, token=token
             )
+            with tempfile.TemporaryDirectory() as tmp:
+                tmp_path = Path(tmp)
+                _copy_tree(DEMOS / name, tmp_path)
+                _copy_tree(DEMOS / "_core", tmp_path / "_core")
+                api.upload_folder(
+                    repo_id=space_id, repo_type="space", folder_path=str(tmp_path), token=token
+                )
+            print(f"  ok -> https://huggingface.co/spaces/{space_id}")
+        except HfHubHTTPError as e:
+            status = getattr(getattr(e, "response", None), "status_code", "?")
+            print(f"  FAILED ({status}): {e}")
+            if status == 403:
+                print("  hint: HF_TOKEN needs WRITE permission to create/push Spaces.")
+            failures.append(name)
+        except Exception as e:
+            print(f"  FAILED: {type(e).__name__}: {e}")
+            failures.append(name)
+
+    if failures:
+        raise SystemExit("Sync failed for: " + ", ".join(failures))
+    print(f"Synced {len(targets)} Space(s) successfully.")
 
 
 if __name__ == "__main__":
