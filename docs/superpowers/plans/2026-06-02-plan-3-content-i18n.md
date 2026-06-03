@@ -157,7 +157,7 @@ git commit -m "feat(site): fall back to English with a banner for missing transl
 
 Each post follows the fixed 6-section template (problem → naïve → solution → tradeoffs → try it → read the code). Frontmatter must validate against the schema (`title, description, publishDate, lang, slug, spaceUrl, githubPath, order, layer`). The bodies below are complete and publishable; expand later if desired.
 
-> Confirm each `spaceUrl` matches the actual deployed Space URL from Plan 2 (`https://mashen-agentic-<short>.hf.space`).
+> Confirm each `spaceUrl` matches the actual deployed Space URL from Plan 2 (`https://shenmali-agentic-<short>.hf.space`).
 
 - [ ] **Step 1: Expand `site/src/content/posts/en/01-react-from-scratch.mdx`** (replace the Plan 1 stub body; keep frontmatter)
 
@@ -201,7 +201,7 @@ description: "Draft a plan, execute it, then reflect and replan — for tasks a 
 publishDate: 2026-06-02
 lang: en
 slug: "plan-execute-reflect"
-spaceUrl: "https://mashen-agentic-plan-execute.hf.space"
+spaceUrl: "https://shenmali-agentic-plan-execute.hf.space"
 githubPath: "demos/02-plan-execute"
 order: 2
 layer: "pattern"
@@ -242,7 +242,7 @@ description: "A boss agent decomposes the task, dispatches specialist workers, a
 publishDate: 2026-06-02
 lang: en
 slug: "orchestrator-workers"
-spaceUrl: "https://mashen-agentic-orchestrator-workers.hf.space"
+spaceUrl: "https://shenmali-agentic-orchestrator-workers.hf.space"
 githubPath: "demos/03-orchestrator-workers"
 order: 3
 layer: "pattern"
@@ -283,7 +283,7 @@ description: "Score answers against references with an LLM judge — the regress
 publishDate: 2026-06-02
 lang: en
 slug: "evals-llm-as-judge"
-spaceUrl: "https://mashen-agentic-evals-llm-as-judge.hf.space"
+spaceUrl: "https://shenmali-agentic-evals-llm-as-judge.hf.space"
 githubPath: "demos/04-evals-llm-as-judge"
 order: 4
 layer: "production"
@@ -323,7 +323,7 @@ description: "Capture tokens, cost, and latency per step — the instrumentation
 publishDate: 2026-06-02
 lang: en
 slug: "observability-tracing"
-spaceUrl: "https://mashen-agentic-observability-tracing.hf.space"
+spaceUrl: "https://shenmali-agentic-observability-tracing.hf.space"
 githubPath: "demos/05-observability-tracing"
 order: 5
 layer: "production"
@@ -363,7 +363,7 @@ description: "Validate structured output against a schema and retry with feedbac
 publishDate: 2026-06-02
 lang: en
 slug: "guardrails-retries"
-spaceUrl: "https://mashen-agentic-guardrails-retries.hf.space"
+spaceUrl: "https://shenmali-agentic-guardrails-retries.hf.space"
 githubPath: "demos/06-guardrails-retries"
 order: 6
 layer: "production"
@@ -403,7 +403,7 @@ description: "Plan sub-questions, search multiple sources, track citations, and 
 publishDate: 2026-06-02
 lang: en
 slug: "deep-research"
-spaceUrl: "https://mashen-agentic-deep-research.hf.space"
+spaceUrl: "https://shenmali-agentic-deep-research.hf.space"
 githubPath: "demos/07-deep-research"
 order: 7
 layer: "flagship"
@@ -462,7 +462,7 @@ description: "Agent'lar düşünmeyi ve araç kullanımını nasıl iç içe ge�
 publishDate: 2026-06-02
 lang: tr
 slug: "react-from-scratch"
-spaceUrl: "https://mashen-agentic-react-from-scratch.hf.space"
+spaceUrl: "https://shenmali-agentic-react-from-scratch.hf.space"
 githubPath: "demos/01-react-from-scratch"
 order: 1
 layer: "pattern"
@@ -526,7 +526,7 @@ description: "Hoe agents redeneren en tools afwisselen — opgebouwd vanuit de b
 publishDate: 2026-06-02
 lang: nl
 slug: "react-from-scratch"
-spaceUrl: "https://mashen-agentic-react-from-scratch.hf.space"
+spaceUrl: "https://shenmali-agentic-react-from-scratch.hf.space"
 githubPath: "demos/01-react-from-scratch"
 order: 1
 layer: "pattern"
@@ -783,4 +783,4 @@ git commit -m "chore: v1 content and i18n complete"
 
 **Placeholder scan:** EN articles (Task 2) are complete, publishable bodies — not placeholders. TR/NL tasks provide a full worked example (post #1) and an exact, mechanical procedure for the remaining six; translations are content the implementer generates, not undefined code. No TODO/TBD gating the build. ✓
 
-**Type/route consistency:** Frontmatter fields match the Zod schema from Plan 1 (`title, description, publishDate, lang, slug, spaceUrl, githubPath, order, layer`). `slug` is shared across languages so routing and the language switcher line up. `PostLayout` now takes `{entry, lang, isFallback}` consistently between Task 1's route and layout edits. `spaceUrl`s follow `https://mashen-agentic-<short>.hf.space`, matching the Space ids produced by Plan 2's `_space_id` (`agentic-<short>`). ✓
+**Type/route consistency:** Frontmatter fields match the Zod schema from Plan 1 (`title, description, publishDate, lang, slug, spaceUrl, githubPath, order, layer`). `slug` is shared across languages so routing and the language switcher line up. `PostLayout` now takes `{entry, lang, isFallback}` consistently between Task 1's route and layout edits. `spaceUrl`s follow `https://shenmali-agentic-<short>.hf.space`, matching the Space ids produced by Plan 2's `_space_id` (`agentic-<short>`). ✓

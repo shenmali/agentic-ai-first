@@ -35,7 +35,7 @@ cd demos && PYTHONPATH=. pytest _core/tests -q
 ## Deployment
 
 GitHub Actions secrets required:
-- `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` — site → Cloudflare Pages (project `agentic-ai`)
-- `HF_TOKEN` — demos → HuggingFace Spaces (user `mashen`)
+- `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` — site → Cloudflare Pages (project `agentic-ai-first`)
+- `HF_TOKEN` — demos → HuggingFace Spaces (user `shenmali`)
 
 DNS: point `agentic.mashen.dev` (CNAME) at the Cloudflare Pages project.

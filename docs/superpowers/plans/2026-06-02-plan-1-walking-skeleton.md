@@ -1644,7 +1644,7 @@ description: "How agents interleave thinking and tool use — built from first p
 publishDate: 2026-06-02
 lang: en
 slug: "react-from-scratch"
-spaceUrl: "https://mashen-agentic-react-from-scratch.hf.space"
+spaceUrl: "https://shenmali-agentic-react-from-scratch.hf.space"
 githubPath: "demos/01-react-from-scratch"
 order: 1
 layer: "pattern"
@@ -1753,7 +1753,7 @@ jobs:
       - name: Sync changed demos
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          HF_USER: mashen
+          HF_USER: shenmali
         run: python -m scripts.sync_spaces
 ```
 
@@ -1769,7 +1769,7 @@ Expected: prints `valid`
 
 GitHub Actions secrets required:
 - `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` — site → Cloudflare Pages (project `agentic-ai`)
-- `HF_TOKEN` — demos → HuggingFace Spaces (user `mashen`)
+- `HF_TOKEN` — demos → HuggingFace Spaces (user `shenmali`)
 
 DNS: point `agentic.mashen.dev` (CNAME) at the Cloudflare Pages project.
 ```

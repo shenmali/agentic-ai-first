@@ -23,5 +23,5 @@ jobs:
       - name: Sync changed demos
         if: ${{ env.HF_TOKEN != '' }}
         env:
-          HF_USER: mashen
+          HF_USER: shenmali
         run: python -m scripts.sync_spaces

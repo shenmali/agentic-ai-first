@@ -11,7 +11,7 @@ secrets below exist, so the Actions tab stays green in the meantime.
 2. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**:
    - `CLOUDFLARE_API_TOKEN` = the token
    - `CLOUDFLARE_ACCOUNT_ID` = the account id
-3. Cloudflare → **Workers & Pages → Create → Pages** → name the project **`agentic-ai`**
+3. Cloudflare → **Workers & Pages → Create → Pages** → name the project **`agentic-ai-first`**
    (must match `--project-name` in `.github/workflows/site-deploy.yml`; change one to match the other if you prefer a different name).
 4. Re-run the **Deploy site** workflow (Actions tab → Deploy site → Re-run), or push any
    change under `site/`. It builds `site/` and deploys `site/dist`.
@@ -20,10 +20,10 @@ secrets below exist, so the Actions tab stays green in the meantime.
 
 ## 2. Demos → HuggingFace Spaces
 
-1. **Confirm your HF username.** The demos currently assume `mashen`
-   (`spaceUrl` in the 21 MDX files = `https://mashen-agentic-<demo>.hf.space`, and
-   `HF_USER: mashen` in `.github/workflows/space-sync.yml`). If your HF username differs,
-   update those references first (one find/replace of `mashen-agentic-` and the `HF_USER`
+1. **Confirm your HF username.** The demos currently assume `shenmali`
+   (`spaceUrl` in the 21 MDX files = `https://shenmali-agentic-<demo>.hf.space`, and
+   `HF_USER: shenmali` in `.github/workflows/space-sync.yml`). If your HF username differs,
+   update those references first (one find/replace of `shenmali-agentic-` and the `HF_USER`
    value).
 2. HF → **Settings → Access Tokens** → create a **write** token.
 3. GitHub repo secret: `HF_TOKEN` = that token.
