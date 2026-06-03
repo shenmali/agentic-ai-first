@@ -2,7 +2,7 @@
 title: Guardrails & Retries
 emoji: 🛡️
 colorFrom: red
-colorTo: orange
+colorTo: yellow
 sdk: gradio
 sdk_version: 4.44.0
 app_file: app.py
