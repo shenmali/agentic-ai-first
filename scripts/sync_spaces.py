@@ -56,8 +56,10 @@ def main() -> None:
     from huggingface_hub import HfApi
     from huggingface_hub.utils import HfHubHTTPError
 
-    hf_user = os.environ["HF_USER"]
-    token = os.environ["HF_TOKEN"]
+    # .strip() guards against a trailing newline/space in the pasted secret,
+    # which otherwise yields "reserved character(s) in header value".
+    hf_user = os.environ["HF_USER"].strip()
+    token = os.environ["HF_TOKEN"].strip()
     api = HfApi()
 
     # Fail fast with an actionable message if the token is invalid / wrong scope.
