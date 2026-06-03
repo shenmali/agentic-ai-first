@@ -32,9 +32,17 @@ secrets below exist, so the Actions tab stays green in the meantime.
 
 ## 3. Live smoke test (BYOK)
 
-Open any deployed Space (or run locally: `cd demos/01-react-from-scratch &&
-PYTHONPATH="..:." python app.py`), paste a real **OpenRouter** key, pick a model, and run.
-This is the one path that hasn't been exercised end-to-end yet.
+Fastest — headless, one command (no Gradio needed):
+
+```bash
+OPENROUTER_API_KEY=sk-or-... python scripts/smoke_live.py            # default model
+OPENROUTER_API_KEY=sk-or-... python scripts/smoke_live.py anthropic/claude-3.5-haiku
+```
+
+Exits 0 when the agent produces a final answer; prints the full streamed trace.
+Or use the UI: open a deployed Space (or `cd demos/01-react-from-scratch &&
+PYTHONPATH="..:." python app.py`), paste a real **OpenRouter** key, pick a model, run.
+This real-provider call is the one path the automated tests can't cover.
 
 ---
 
